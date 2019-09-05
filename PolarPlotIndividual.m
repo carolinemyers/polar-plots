@@ -1,8 +1,42 @@
-%% Now plot ALL mean accuracies in a polar plot
+%%  00a Hello
+%%% Create a polar plot for one observer: DPF (but works with other
+%%% experiments too)
+%Written by Caroline Myers (contact: cfm304@nyu.edu) 
+%New York University
+%Carrasco Lab
+%September 2019. 
+%Version history: D2
+
+%This program was written by Caroline Myers. The point of this script is to visualize accuracy in a 2-AFC
+%discrimination task at four cardinal locations across two attentional
+%conditions (valid/neutral exo cuing)
+
+%Assumptions: This script assumes that the 'SetText' function (Myers, 2019,
+%NYU) resides within the same folder as this script. This program also
+%assumes manual user input (as stated below.)
+
+%Inputs: 
+% vUVMacc: accuracy at northern location for VALID trials (change this in section 1)
+% vTemporalAcc: accuracy at eastern location for VALID trials (change this in section 1)
+% vLVMAcc: accuracy at southern location for VALID trials (change this in section 1)
+% vNasalAcc: accuracy at western location for VALID trials (change this in section 1)
+
+% nUVMacc: accuracy at northern location for NEUTRAL trials (change this in section 1)
+% nTemporalAcc: accuracy at eastern location for NEUTRAL trials (change this in section 1)
+% nLVMAcc: accuracy at southern location for NEUTRAL trials (change this in section 1)
+% nNasalAcc: accuracy at western location for NEUTRAL trials (change this in section 1)
+
+%Title: In addition to inputting accuracies per location/condition, the
+%user must also change the title of the output figure to reflect the nature
+%of the experimental data. (change this in code section 2)
+
+% Outputs: Polar plot visualizing accuracy at 4 cardinal locations (N, E, S,
+% W) for valid and neutral trials, labeled with accuracy at each loc
+%% 00b Init
 clear all
 close all
 clc
-%% Vars & Constants
+%% 00c Vars & Constants
 cardinalLocations = [0, 0.5*pi, pi, 1.5*pi,0];
 TemporalLocationRad = cardinalLocations(1,1); %This is the temporal location (in rad)
 UVMLocationRad = cardinalLocations(1,2);%This is the UVM location (in rad)
@@ -12,19 +46,18 @@ specifiedRhoLim = [.5 1];%These are the specified min and max axes limits we wan
 desiredLinewidth = 2.2; %This is the linewidth for the figure
 hair = .054; %adds hair for fig
 smallerHair = .02;
-%% THIS IS WHERE USER INPUTS ACCURACY VALUES 
-vTemporalAcc = 1            %%%%%%%%%%%%%% CHANGE THIS!
-vUVMacc = 0.645833333       %%%%%%%%%%%%%% CHANGE THIS!
-vNasalAcc = 1               %%%%%%%%%%%%%% CHANGE THIS!
-vLVMAcc = 0.770833333       %%%%%%%%%%%%%% CHANGE THIS!
+%% 01 THIS IS WHERE USER INPUTS ACCURACY VALUES 
+vUVMacc = 0.645833333       %%%%%%%%%%%%%% CHANGE THIS! This is the accuracy at the northern location (UVM) for VALID trials
+vTemporalAcc = 1            %%%%%%%%%%%%%% CHANGE THIS! This is the accuracy at the eastern (temporal) location for VALID trials
+vLVMAcc = 0.770833333       %%%%%%%%%%%%%% CHANGE THIS! This is the accuracy at the southern location (LVM) for VALID trials
+vNasalAcc = 1               %%%%%%%%%%%%%% CHANGE THIS! This is the accuracy at the western (nasal) location for VALID trials
 
-nTemporalAcc = 0.895833333  %%%%%%%%%%%%%% CHANGE THIS!
-nUVMacc = 0.479166667       %%%%%%%%%%%%%% CHANGE THIS!
-nNasalAcc = 0.9375          %%%%%%%%%%%%%% CHANGE THIS!
-nLVMAcc =  0.708333333      %%%%%%%%%%%%%% CHANGE THIS!
+nUVMacc = 0.479166667       %%%%%%%%%%%%%% CHANGE THIS! This is the accuracy at the northern location (UVM) for NEUTRAL trials
+nTemporalAcc = 0.895833333  %%%%%%%%%%%%%% CHANGE THIS! This is the accuracy at the eastern (temporal) location for NEUTRAL trials
+nLVMAcc =  0.708333333      %%%%%%%%%%%%%% CHANGE THIS! This is the accuracy at the southern location (LVM) for NEUTRAL trials
+nNasalAcc = 0.9375          %%%%%%%%%%%%%% CHANGE THIS! This is the accuracy at the western (nasal) location for NEUTRAL trials
 
-
-
+%% 02 Make the plot
 polarPlotFigure = figure; %opens new fig 'polarPlotFigure'
 %Theta contains location around the circle. AKA the angle. In radians. 
 %Rho contains the legnth of the radii 
@@ -40,7 +73,7 @@ rhoN = [nTemporalAcc,nUVMacc,nNasalAcc,nLVMAcc, nTemporalAcc]; %The radii (accur
 neutralHandleAll = polarplot(thetaN,rhoN);%get a handle on that thing!
 neutralHandleAll.LineWidth = desiredLinewidth; %set desired linewidth
 rlim([specifiedRhoLim]);
-title('Accuracy at 8 cpd: observer KL');%add observer initials here
+title('Accuracy at 8 cpd: observer KL');%add observer initials here: CHANGE ME!!! 
 leg = legend('Valid','Neutral');
 %%%%%%%%add text
 validHandleAll = gca; %gets current axes
